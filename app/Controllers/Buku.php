@@ -99,6 +99,15 @@ class Buku extends BaseController
 
 	public function hapus($id)
 	{
+		// Cari nama gambar
+		$buku = $this->bukuModel->find($id);
+
+		// Cek jika file gambarnya default.png
+		if($buku['sampul'] != 'default.png') {
+			// Hapus gambar
+			unlink('img/' . $buku['sampul']);
+		}
+
 		$this->bukuModel->delete($id);
 
 		session()->setFlashdata('pesan', 'Data buku berhasil di hapus');
