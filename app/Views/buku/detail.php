@@ -1,7 +1,6 @@
 <?= $this->extend('layout/templates'); ?>
 <?= $this->section('content'); ?>
 <div class="container mt-3">
-    <a href="/Buku/tambah" class="btn btn-primary float-end">Tambah Buku</a>
     <h2 class="text-center">Detail</h2>
     <hr>
     <div class="card mb-3">
@@ -21,7 +20,12 @@
                         <?= $buku['penerbit']; ?>
                     </p>
                     <a href="/buku/edit/<?= $buku['slug']; ?>" class="btn btn-warning">Edit</a>
-                    <a href="/buku/hapus/<?= $buku['id']; ?>" class="btn btn-danger">Hapus</a>
+                    <!-- Tombol hapus -->
+                    <form action="/buku/<?= $buku['id']; ?>" method="POST" class="d-inline">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('Anda Yakin ?')">Hapus</button>
+                    </form>
                     <a href="/buku">Kembali</a>
                 </div>
             </div>
