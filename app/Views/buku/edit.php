@@ -3,9 +3,10 @@
 <div class="container mt-3">
     <h2 class="text-center">Edit Buku</h2>
     <hr>
-    <form action="/buku/update/<?= $buku['id']; ?>" method="POST">
+    <form action="/buku/update/<?= $buku['id']; ?>" method="POST" enctype="multipart/form-data">
         <?= csrf_field(); ?>
         <input type="hidden" name="slug" value="<?= $buku['slug']; ?>">
+        <input type="hidden" name="sampulLama" value="<?= $buku['sampul']; ?>">
         <div class="row mb-3">
             <label for="judul" class="col-sm-2 col-form-label">Judul :</label>
             <div class="col-sm-10">
@@ -29,8 +30,18 @@
         </div>
         <div class="row mb-3">
             <label for="sampul" class="col-sm-2 col-form-label">Sampul :</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="sampul" name="sampul" value="<?= ($validation->hasError('sampul')) ? old('sampul') : $buku['sampul']; ?>">
+            <div class="col-sm-2">
+                <img src="/img/<?= $buku['sampul']; ?>" class="img-thumbnail img-preview">
+            </div>
+            <div class="col-sm-8">
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control <?= ($validation->hasError('sampul')) ? 'is-invalid' : ''; ?>" name="sampul" id="sampul" onchange="previewImage()">
+                    <label class="input-group-text" for="sampul">
+                        <?= $buku['sampul']; ?></label>
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                        <?= $validation->getError('sampul'); ?>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="mb-3">
