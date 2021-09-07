@@ -16,6 +16,7 @@
     <?php echo $this->renderSection('content'); ?>
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>
